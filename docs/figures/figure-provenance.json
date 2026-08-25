@@ -3,7 +3,7 @@
   "configuration_checksum": "977e9b51ecdef3757a76323c6ae991ee1df3e25030dab60a742b89de4675575c",
   "figures": [
     {
-      "bytes": 72851,
+      "bytes": 87814,
       "caption": "Synthetic demonstration (GS-FIG-002). Frequency-to-velocity mapping under the relativistic Doppler convention (https://docs.astropy.org/en/stable/api/astropy.units.doppler_relativistic.html) and an explicit rest frequency. No observational reference-frame correction is applied: the velocity coordinate is not topocentric, geocentric, barycentric, heliocentric, or LSR. This is a software convention for a synthetic demonstration, not a validated method for any measurement.",
       "claim_id": "GS-FIG-002",
       "code_version": "0.1.0",
@@ -11,19 +11,19 @@
       "configuration_path": "config/demo.json",
       "filename": "synthetic_frequency_velocity_mapping.png",
       "generating_command": "python scripts/regenerate_figures.py",
-      "input_checksum": "8e3e95d3b06a9a5eb21b8f01d7c1da87b2a988ca15daefb864e53ea2fa6ddcb3",
+      "input_checksum": "3ab25c694379b7c81d4017b5c00e4a584bf3becf37984be112d9570fce255a8d",
       "inputs": {
-        "synthetic_spectrum_cleaned.dat": "021a772be8238855843b7bc9ba2ab41ef956d344bde4e6ba974bdbc16df3d21a",
-        "synthetic_velocity_table.csv": "e53d6f998e9cf68af284875cdb0d2d10da4ba31f4b245b7579a7d3397435b6cf"
+        "synthetic_spectrum_cleaned.dat": "5468a1344977c95d83ba945695f1fc398fc1ee9b7526699b782e88a147404cff",
+        "synthetic_velocity_table.csv": "3c034b194d2750184035571b065ff96e825d88353e7b3e6ec03749358ec5b94c"
       },
       "label": "synthetic",
       "reference_frame": "none-applied",
-      "sha256": "5487505b1d60071a59eba90b8163dd215e354ed722462b9543b84e250f46b333",
+      "sha256": "8d4eb5dbdba8f82aae9af6508f1ad0ca8d08a20bf9cb8512be82528ed53ebdd1",
       "x_axis_unit": "Hz",
       "y_axis_unit": "km / s"
     },
     {
-      "bytes": 112709,
+      "bytes": 128120,
       "caption": "Synthetic demonstration (GS-FIG-001). Synthetic spectrum before and after deterministic removal of synthetic interference that this package injected. Not an observation; no measured data is involved, and no interference-removal performance on real observations is claimed.",
       "claim_id": "GS-FIG-001",
       "code_version": "0.1.0",
@@ -31,15 +31,15 @@
       "configuration_path": "config/demo.json",
       "filename": "synthetic_spectrum_before_after.png",
       "generating_command": "python scripts/regenerate_figures.py",
-      "input_checksum": "0668d25a65c0ac57fb32ba1fd983b1cb906d13919080d094fd106a5fcf1dc9ba",
+      "input_checksum": "8098a6f7155a5d22f07c52be4168e3ececc82a72b4c078a968e95d550d0fb7b4",
       "inputs": {
-        "synthetic_spectrum.dat": "8e5e592824efcb9b1d8afdb29ce7bf73c6e75e2634d84924e8c0931dab5286de",
-        "synthetic_spectrum_cleaned.dat": "021a772be8238855843b7bc9ba2ab41ef956d344bde4e6ba974bdbc16df3d21a",
-        "synthetic_spectrum_with_interference.dat": "f07870ba1404efe14651f37ee058fb85ab3f31b464066d3c516663e23f32ac14"
+        "synthetic_spectrum.dat": "3a880a6919b6a587864fa8b200414e6f5ca88855f28c6a028b1338f1c7055cc6",
+        "synthetic_spectrum_cleaned.dat": "5468a1344977c95d83ba945695f1fc398fc1ee9b7526699b782e88a147404cff",
+        "synthetic_spectrum_with_interference.dat": "40a1b2812a4d2886ad4cb4ac1894b79b6ee1a8e7b1f0d510d6e8c6f74dea5282"
       },
       "label": "synthetic",
       "reference_frame": "none-applied",
-      "sha256": "aa321c34b65bf076c6623b02ef25f2a56b358058b595c27f3abbc51f540419b9",
+      "sha256": "aa2676f94478a90d7850757c7dc179c8a23914567456f115139ff89a91484eba",
       "x_axis_unit": "Hz",
       "y_axis_unit": "Volts"
     }

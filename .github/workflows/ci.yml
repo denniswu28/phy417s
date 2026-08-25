@@ -69,6 +69,17 @@ jobs:
           diff -r output/ci-demo output/ci-demo-repeat
           echo "Both runs produced byte-identical artifacts."
 
+      - name: Upload the demo output
+        # Kept so that a byte difference between platforms can be diagnosed from
+        # the actual artifacts rather than guessed at. Everything uploaded is
+        # synthetic.
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: demo-output
+          path: output/ci-demo/
+          if-no-files-found: error
+
       - name: Regenerate the committed figures
         run: python scripts/regenerate_figures.py
 
