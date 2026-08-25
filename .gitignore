@@ -1,1 +1,18 @@
-galaxy
+# Build and packaging artifacts
+build/
+dist/
+*.egg-info/
+
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+
+# Virtual environments
+.venv/
+venv/
+
+# Demo output. Generated artifacts are never committed; the only committed
+# figures live in docs/figures/ and are refreshed by scripts/regenerate_figures.py.
+output/

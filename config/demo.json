@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "label": "synthetic",
+  "seed": 20260807,
+  "spectrum": {
+    "frequency_start_hz": 1419400000.0,
+    "frequency_stop_hz": 1421400000.0,
+    "n_channels": 601,
+    "baseline_volts": 0.05,
+    "noise_sigma_volts": 0.0015,
+    "line_center_hz": 1420405751.768,
+    "line_width_hz": 250000.0,
+    "line_peak_volts": 0.02
+  },
+  "interference": {
+    "spikes": [
+      {
+        "center_hz": 1419700000.0,
+        "width_channels": 3,
+        "amplitude_volts": 0.25
+      },
+      {
+        "center_hz": 1420900000.0,
+        "width_channels": 1,
+        "amplitude_volts": 0.4
+      },
+      {
+        "center_hz": 1421150000.0,
+        "width_channels": 5,
+        "amplitude_volts": 0.18
+      }
+    ]
+  },
+  "cleaning": {
+    "threshold_sigma": 6.0,
+    "window_channels": 15
+  },
+  "velocity": {
+    "rest_frequency_value": 1420405751.768,
+    "rest_frequency_unit": "Hz",
+    "doppler_convention": "relativistic"
+  }
+}

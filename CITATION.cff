@@ -1,0 +1,36 @@
+cff-version: 1.2.0
+message: >-
+  If you refer to this software, please cite it using the metadata below. Cite
+  it as a synthetic-only software demonstration. It reports no measurement and
+  no scientific result, so it must not be cited as evidence for a rotation
+  curve, a galactic-structure result, a calibration accuracy, an uncertainty,
+  or a 21 cm detection.
+title: galaxy-structure
+abstract: >-
+  A deterministic, synthetic-only demonstration of the software a 21 cm spectrum
+  analysis needs: schema-validated ingestion with declared units, deterministic
+  synthetic spectrum generation, deterministic interference injection and
+  masking with an explicit record of every altered sample, frequency-to-velocity
+  conversion under an explicit rest frequency and Doppler convention,
+  byte-reproducible figures, and a run manifest. Every datum it handles is
+  synthetic; it contains no measured observation. Real-observation calibration
+  and reference-frame stages are present by name and fail closed, because the
+  evidence they require was never established. The software was written for the
+  rebuild of a physics final project by Dennis Wu and Alex Tong, who contributed
+  equally to that project overall and collected its measurements together; those
+  measurements are not included here. All code in this repository was written by
+  Dennis Wu. Those attribution statements are the owner's, recorded as such and
+  not independently verified.
+type: software
+authors:
+  - family-names: Wu
+    given-names: Dennis
+version: 0.1.0
+license: GPL-3.0-or-later
+repository-code: https://github.com/denniswu28/phy417s
+keywords:
+  - synthetic data
+  - reproducibility
+  - spectrum analysis
+  - radio astronomy software
+  - unit safety

@@ -1,0 +1,114 @@
+name: CI
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  # Make build isolation honour the same pins as everything else.
+  PIP_CONSTRAINT: constraints-ci.txt
+
+jobs:
+  verify:
+    name: Build, lint, test, and check figure drift
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Check out the exact commit
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Report the pinned environment
+        run: |
+          python --version
+          python -m pip --version
+
+      # The commands below are the documented verification sequence in README.md,
+      # in the same order. Local runs and CI must not drift apart.
+      - name: Install the pinned verification tooling
+        run: python -m pip install --constraint constraints-ci.txt build ruff pytest
+
+      - name: Build the wheel
+        run: python -m build --wheel --outdir dist
+
+      - name: Install the built wheel
+        run: python -m pip install --constraint constraints-ci.txt dist/*.whl
+
+      - name: Check for dependency conflicts
+        run: python -m pip check
+
+      - name: Lint
+        run: ruff check .
+
+      - name: Check formatting
+        run: ruff format --check .
+
+      - name: Run the test suite
+        run: python -m pytest -q
+
+      - name: Run the documented demo command
+        run: galaxy-structure run-demo --output-dir output/ci-demo --seed 20260807
+
+      - name: Run the demo a second time into a clean directory
+        run: galaxy-structure run-demo --output-dir output/ci-demo-repeat --seed 20260807
+
+      - name: Prove the two runs are byte-identical
+        run: |
+          diff -r output/ci-demo output/ci-demo-repeat
+          echo "Both runs produced byte-identical artifacts."
+
+      - name: Upload the demo output
+        # Kept so that a byte difference between platforms can be diagnosed from
+        # the actual artifacts rather than guessed at. Everything uploaded is
+        # synthetic.
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: demo-output
+          path: output/ci-demo/
+          if-no-files-found: error
+
+      - name: Regenerate the committed figures
+        run: python scripts/regenerate_figures.py
+
+      - name: Upload the regenerated figures
+        # Always uploaded, so a drift failure can be inspected byte for byte
+        # instead of guessed at.
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: regenerated-figures
+          path: docs/figures/
+          if-no-files-found: error
+
+      - name: Fail on figure or provenance drift
+        run: git diff --exit-code -- docs/figures
+
+      - name: Regenerate the figures a second time
+        run: python scripts/regenerate_figures.py
+
+      - name: Fail on drift between the two regenerations
+        run: git diff --exit-code -- docs/figures
+
+      - name: Confirm no measured data or legacy artifact re-entered the tree
+        run: |
+          set -euo pipefail
+          # Report paths and categories only; never print file contents.
+          if git ls-files -z | grep -zEi '\.(zip|dat|fig|mat|xlsx|jpg|jpeg|pdf|ipynb)$' \
+             | tr '\0' '\n' | grep -v '^$'; then
+            echo "::error::A withheld or excluded file category is present in the tree."
+            exit 1
+          fi
+          echo "No archive, measured-data, notebook, spreadsheet, photograph, or PDF path is tracked."

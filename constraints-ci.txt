@@ -1,0 +1,40 @@
+# Pinned verification environment for galaxy-structure.
+#
+# Every documented command in README.md and .github/workflows/ci.yml installs
+# with `--constraint constraints-ci.txt` so that local runs and CI resolve the
+# same wheels. Determinism claims in docs/claim-evidence.md are scoped to this
+# pinned environment on Python 3.12 and to no other environment.
+#
+# Runtime dependencies (declared in pyproject.toml) and their transitive pins.
+astropy==8.0.1
+astropy-iers-data==0.2026.8.24.0.24.29
+contourpy==1.3.3
+cycler==0.12.1
+fonttools==4.63.0
+kiwisolver==1.5.0
+matplotlib==3.11.1
+numpy==2.5.2
+packaging==26.3
+pillow==12.3.0
+pyerfa==2.0.1.5
+pyparsing==3.3.2
+python-dateutil==2.9.0.post0
+PyYAML==6.0.3
+six==1.17.0
+
+# Build backend. Pinned so that `python -m build` resolves the same backend in
+# CI and locally; the CI workflow exports PIP_CONSTRAINT so build isolation
+# honours this pin too.
+setuptools==84.0.0
+
+# Verification tooling.
+build==1.5.0
+pyproject_hooks==1.2.0
+pytest==9.1.1
+iniconfig==2.3.0
+pluggy==1.6.0
+Pygments==2.21.0
+ruff==0.16.4
+
+# Platform-conditional transitive dependency; constrained only if installed.
+colorama==0.4.6
