@@ -1,0 +1,8 @@
+# Normalise every text file to LF in the repository and in the working tree.
+# The committed figures and their provenance record are compared byte for byte
+# by `git diff --exit-code -- docs/figures`, so line endings must not vary by
+# platform.
+* text=auto eol=lf
+
+# Binary artifacts: never touched by line-ending conversion.
+*.png binary

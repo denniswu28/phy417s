@@ -1,0 +1,51 @@
+{
+  "code_version": "0.1.0",
+  "configuration_checksum": "977e9b51ecdef3757a76323c6ae991ee1df3e25030dab60a742b89de4675575c",
+  "figures": [
+    {
+      "bytes": 72851,
+      "caption": "Synthetic demonstration (GS-FIG-002). Frequency-to-velocity mapping under the relativistic Doppler convention (https://docs.astropy.org/en/stable/api/astropy.units.doppler_relativistic.html) and an explicit rest frequency. No observational reference-frame correction is applied: the velocity coordinate is not topocentric, geocentric, barycentric, heliocentric, or LSR. This is a software convention for a synthetic demonstration, not a validated method for any measurement.",
+      "claim_id": "GS-FIG-002",
+      "code_version": "0.1.0",
+      "configuration_checksum": "977e9b51ecdef3757a76323c6ae991ee1df3e25030dab60a742b89de4675575c",
+      "configuration_path": "config/demo.json",
+      "filename": "synthetic_frequency_velocity_mapping.png",
+      "generating_command": "python scripts/regenerate_figures.py",
+      "input_checksum": "8e3e95d3b06a9a5eb21b8f01d7c1da87b2a988ca15daefb864e53ea2fa6ddcb3",
+      "inputs": {
+        "synthetic_spectrum_cleaned.dat": "021a772be8238855843b7bc9ba2ab41ef956d344bde4e6ba974bdbc16df3d21a",
+        "synthetic_velocity_table.csv": "e53d6f998e9cf68af284875cdb0d2d10da4ba31f4b245b7579a7d3397435b6cf"
+      },
+      "label": "synthetic",
+      "reference_frame": "none-applied",
+      "sha256": "5487505b1d60071a59eba90b8163dd215e354ed722462b9543b84e250f46b333",
+      "x_axis_unit": "Hz",
+      "y_axis_unit": "km / s"
+    },
+    {
+      "bytes": 112709,
+      "caption": "Synthetic demonstration (GS-FIG-001). Synthetic spectrum before and after deterministic removal of synthetic interference that this package injected. Not an observation; no measured data is involved, and no interference-removal performance on real observations is claimed.",
+      "claim_id": "GS-FIG-001",
+      "code_version": "0.1.0",
+      "configuration_checksum": "977e9b51ecdef3757a76323c6ae991ee1df3e25030dab60a742b89de4675575c",
+      "configuration_path": "config/demo.json",
+      "filename": "synthetic_spectrum_before_after.png",
+      "generating_command": "python scripts/regenerate_figures.py",
+      "input_checksum": "0668d25a65c0ac57fb32ba1fd983b1cb906d13919080d094fd106a5fcf1dc9ba",
+      "inputs": {
+        "synthetic_spectrum.dat": "8e5e592824efcb9b1d8afdb29ce7bf73c6e75e2634d84924e8c0931dab5286de",
+        "synthetic_spectrum_cleaned.dat": "021a772be8238855843b7bc9ba2ab41ef956d344bde4e6ba974bdbc16df3d21a",
+        "synthetic_spectrum_with_interference.dat": "f07870ba1404efe14651f37ee058fb85ab3f31b464066d3c516663e23f32ac14"
+      },
+      "label": "synthetic",
+      "reference_frame": "none-applied",
+      "sha256": "aa321c34b65bf076c6623b02ef25f2a56b358058b595c27f3abbc51f540419b9",
+      "x_axis_unit": "Hz",
+      "y_axis_unit": "Volts"
+    }
+  ],
+  "generating_command": "python scripts/regenerate_figures.py",
+  "label": "synthetic",
+  "note": "Every figure recorded here is a synthetic demonstration. None of them is an observation, none carries an observational reference frame, and none supports a rotation-curve, galactic-structure, calibration-accuracy, uncertainty, or detection claim.",
+  "provenance_version": 1
+}
