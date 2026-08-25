@@ -32,7 +32,7 @@ withholds all of them and demonstrates the software on synthetic data instead.
 What that leaves is worth reading on its own terms: a pipeline where every unit
 is declared, every validation is enforced rather than assumed, every stage that
 lacks evidence fails closed instead of returning a plausible number, and every
-artifact is byte-reproducible.
+artifact is byte-reproducible within a pinned environment.
 
 ## Install and run
 
@@ -77,12 +77,18 @@ observational reference-frame correction is applied** — the velocity coordinat
 is not topocentric, geocentric, barycentric, heliocentric, or LSR
 (`GS-FRAME-001`).
 
-Both figures regenerate byte-identically from committed inputs:
+Both figures regenerate byte-identically from committed inputs, on the platform
+CI runs:
 
 ```bash
 python scripts/regenerate_figures.py
 git diff --exit-code -- docs/figures
 ```
+
+The committed PNG bytes are the ones produced by the pinned environment on the
+CI platform. On a different operating system that `git diff` is expected to
+report a difference; it is a platform artifact, not drift
+(`GS-DET-002`, and [`docs/limitations.md`](docs/limitations.md)).
 
 Their full provenance — generating command, input checksums, configuration
 checksum, code version, axis units, synthetic label, frame boundary, and claim
@@ -128,8 +134,10 @@ are preserved bitwise, every altered sample is recorded, and the mask is written
 out in full.
 
 **Runs are reproducible** (`GS-DET-001`). Two runs of the same configuration and
-seed produce byte-identical artifacts within the pinned environment — including
-the PNGs, which carry no creation time, host, user, or path.
+seed produce byte-identical artifacts within the pinned environment on one
+platform — including the PNGs, which carry no creation time, host, user, or
+path. Cross-platform byte identity is measured, and explicitly not claimed
+(`GS-DET-002`).
 
 **Validation is enforced** (`GS-VALID-001`). Non-finite values, empty input,
 wrong shapes, mismatched lengths, descending or duplicated or non-uniform

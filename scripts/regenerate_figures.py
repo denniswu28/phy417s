@@ -9,10 +9,15 @@ copies the two PNG figures into ``docs/figures/``, and rewrites
 ``docs/figures/figure-provenance.json``.
 
 Under the pinned environment in ``constraints-ci.txt`` the output is
-byte-identical on every run, so ``git diff --exit-code -- docs/figures`` is the
-drift gate. The provenance record deliberately contains no absolute path, host
-name, user name, Python version, or timestamp, so it stays identical across
-machines within the pinned environment.
+byte-identical on every run **on one platform**, so
+``git diff --exit-code -- docs/figures`` is the drift gate. The provenance
+record deliberately contains no absolute path, host name, user name, Python
+version, or timestamp.
+
+The committed figures are the bytes produced on the CI platform, which is where
+that gate is evaluated. Regenerating on a different operating system produces
+visually identical but byte-different files; see ``GS-DET-002`` in
+``docs/claim-evidence.md``.
 """
 
 from __future__ import annotations

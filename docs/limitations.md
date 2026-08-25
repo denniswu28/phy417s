@@ -82,18 +82,42 @@ question 13, do not establish the historically correct choice for the measured
 files, and do not validate the legacy implementation whose two conflicting
 rest-frequency scales the audit records (`GS-UNITS-001`).
 
-## 6. Determinism is scoped to one pinned environment
+## 6. Determinism is scoped to one pinned environment on one platform
 
 `GS-DET-001` holds **within the pinned environment of `constraints-ci.txt`, on
-Python 3.12**. Outside it, nothing is claimed:
+Python 3.12, on a single platform**. Repeated runs there are byte-identical, and
+CI proves it at the exact head by running the demo twice into clean directories
+and comparing with `diff -r`.
 
+**Across operating systems, byte identity does not hold, and is not claimed**
+(`GS-DET-002`). This was measured, not assumed. The same commit, configuration
+and seed were run under the same pins on Windows and on the CI platform:
+
+- exactly **one of 601** amplitude samples differed, by **one representable
+  floating-point step** — `0.06481719480790925` against `0.06481719480790923`;
+- the interference-mask record was **byte-identical**, so the seeded random
+  stream and every cleaning decision agreed; and
+- both PNGs differed.
+
+This repository does **not** establish which operation produced that difference
+and asserts no cause for it.
+
+What follows from it, practically:
+
+- The PNGs committed in `docs/figures/` are the bytes produced by the **CI
+  platform**, which is where the drift gate is evaluated. Running
+  `python scripts/regenerate_figures.py && git diff --exit-code -- docs/figures`
+  on a different operating system is expected to report a difference. That
+  difference is a platform artifact, not drift in this repository's inputs,
+  configuration, or code.
 - NumPy guarantees stream reproducibility for a fixed seed within a fixed
-  version, which is why NumPy is pinned (`GS-RNG-001`);
-- PNG bytes depend on the exact matplotlib, Pillow, and font stack, which is why
-  matplotlib and Pillow are pinned and the committed figures are generated in
-  the same environment CI verifies them in; and
-- the run manifest records the Python and package versions, so a mismatch is
-  visible rather than silent.
+  version, which is why NumPy is pinned (`GS-RNG-001`). That guarantee covers
+  the random stream, which is exactly the part that did agree.
+- PNG bytes additionally depend on the exact matplotlib, Pillow, and font stack,
+  which is why both are pinned and the committed figures are generated in the
+  same environment CI verifies them in.
+- The run manifest records the Python and package versions, so an environment
+  mismatch is visible rather than silent.
 
 ## 7. What the history still contains
 
